@@ -51,6 +51,7 @@ int main(){
         scanf("%d", &comando);
         if (comando>=0 && comando <=5) funcoes[comando](head);
     } while (comando!=0);
+    printf("\n");
     return 0;
 }
 
