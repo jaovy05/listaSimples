@@ -72,18 +72,23 @@ void excluir(registro *head)
     char matri[m];
     scanf("%s", matri);
     if (listavazia(head) == 0) return ;
-    registro *temp = head->next, *aux = head;
-    while(strcmp(temp->matricula, matri)!= 0){
-        if (temp->next== NULL) return ;
+    registro *temp = head->next, *aux = head, *tempRemove;
+    while(temp != NULL){
+        if (strcmp(temp->matricula, matri) == 0){
+            tempRemove=temp;
+            temp=temp->next;
+            excluirItem(aux,tempRemove);
+            continue;
+        }
         temp = temp->next;
-        aux = head->next;
+        aux = aux->next;
     }
-    excluirItem(aux,temp);
 }
 
-void listar(registro *head ){
+void listar(registro *head )
+{
     if (listavazia(head) == 0) return ;
-    registro *temp=head;
+    registro *temp = head;
     while(temp->next != NULL){
         temp = temp->next;
         printf("%s, %s, %d/%d/%d, %.2f\n", temp->matricula, temp->nome, 
@@ -94,7 +99,7 @@ void listar(registro *head ){
 void inverso(registro *head )
 {
     if (listavazia(head) == 0) return ;
-    registro *temp, *contra=(registro *)malloc(sizeof(registro *));
+    registro *temp, *contra = (registro *)malloc(sizeof(registro *));
     contra->next = NULL;
     while (head->next != NULL)
     {
@@ -115,7 +120,7 @@ void inverso(registro *head )
 void numelementos(registro *head )
 {
     registro *temp = head;
-    int count=0;
+    int count = 0;
     while(temp->next != NULL)
     {
         temp=temp->next;
@@ -126,7 +131,7 @@ void numelementos(registro *head )
 
 void limpar(registro *head )
 {
-    int t=0;
+    int t = 0;
     while(head->next != NULL)
     {
         excluirItem(head, head->next);
