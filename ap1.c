@@ -32,6 +32,7 @@ void limpar(registro *head );
 void excluirItem(registro *anterior, registro *excluido);
 int listavazia(registro *head);
 void insere(registro *anterior, registro *novo);
+void printrecursivo(registro *head);
 
 int main(){
     int comando;
@@ -99,24 +100,17 @@ void listar(registro *head )
 void inverso(registro *head )
 {
     if (listavazia(head) == 0) return ;
-    registro *temp, *contra = (registro *)malloc(sizeof(registro *));
-    contra->next = NULL;
-    while (head->next != NULL)
-    {
-        temp = head->next;
-        head->next = temp->next;
-        insere(contra, temp);
-
-    }
-    listar(contra);
-    while (contra->next != NULL)
-    {
-        temp = contra->next;
-        contra->next = temp->next;
-        insere(head, temp);
-    }
-    free(contra);
+    printrecursivo(head->next);
 }
+
+void printrecursivo(registro *head)
+{
+    if (head==NULL) return;
+    printrecursivo(head->next);
+    printf("%s, %s, %d/%d/%d, %.2f\n", head->matricula, head->nome, 
+            head->data.dia, head->data.mes, head->data.ano, head->nota);
+}
+
 void numelementos(registro *head )
 {
     registro *temp = head;
